@@ -1,25 +1,20 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict, astuple, field
 
 @dataclass
 class Pessoa:
-    nome: str
-    sobrenome: str
+    nome: str = field(
+        default='Not Sent',
+        repr=False,
+    )
+    sobrenome: str = 'Not Sent'
+    idade : int = 0
+    endereco: list[str] = field(default_factory=list)
 
-    def __post_init__(self):
-        self.nome_completo = f'{self.nome} {self.sobrenome}'
-
-    @property
-    def nome_completo(self):
-        return f'{self.nome} {self.sobrenome}'
-    
-    @nome_completo.setter
-    def nome_completo(self, valor):
-        nome, *sobrenome = valor.split()
-        self.nome = nome
-        self.sobrenome = ' '.join(sobrenome)
 
 if __name__ == '__main__':
-    p1 = Pessoa('João', 'Victor')
+    p1 = Pessoa('João', 'Silva')
     print(p1)
-    p1.nome_completo = 'Maria Eduarda Lima'
-    print(p1)
+    print(asdict(p1).keys())
+    print(asdict(p1).values())
+    print(asdict(p1).items())
+    print(astuple(p1))
