@@ -11,5 +11,6 @@ Carta2 = namedtuple(
     )
 as_espada = Carta('Espada', 'Ás')
 
+
 for valor in as_espada:
     print(valor)
